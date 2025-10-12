@@ -56,8 +56,7 @@ def total_salary(path: str) -> tuple[int, float]:
         raise ValueError(f"Файл '{path}' не знайдено.")
 
     if critical_errors:
-        report = ["Знайдено критичні помилки (обчислення скасовано):", *critical_errors]
-        raise ValueError("\n".join(report))
+        raise ValueError("Знайдено критичні помилки (обчислення скасовано):\n" + "\n".join(critical_errors))
 
     average = total / count_valid if count_valid else 0.0
     return total, average
