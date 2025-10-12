@@ -13,7 +13,7 @@ def get_cats_info(path:str) -> list[dict[str, str]]:
                     
                     try:
                         age = int(parts[2].strip()) # Конвертація віку в ціле число
-                        if not 0 < age < 40: # Перевірка віку =), виключення ValueError
+                        if not 0 < age < 40: # Перевірка віку котів, та котів-довгожителів =), виключення ValueError
                             errors.append(f"Вік повинен бути >0 і <40: {age} у рядку '{count}': '{line.strip()}'")
                     except ValueError: # Обробка некоректних значень
                         errors.append(f"Некоректне значення віку: '{parts[2]}' у рядку '{count}': '{line.strip()}'")
@@ -24,8 +24,8 @@ def get_cats_info(path:str) -> list[dict[str, str]]:
                         "age": str(age),
                         })
                 else: # Обробка рядків з некоректною кількістю частин. 
-                    errors.append(f"Некоректний формат рядка (очікувався 'ID,Імʼя,Вік')' у рядку '{count}': ''{line.strip()}'")
-                    continue
+                    errors.append(f"Некоректний формат рядка (очікувався 'ID,Імʼя,Вік')' у рядку '{count}': '{line.strip()}'")
+
 
     except FileNotFoundError: # Обробка відсутності файлу
         raise FileNotFoundError(f"Файл '{path}' не знайдено.")
