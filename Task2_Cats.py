@@ -36,13 +36,13 @@ def get_cats_info(path:str) -> list[dict[str, str]]:
                     errors.append(
                         f"Некоректний формат рядка (очікувався 'ID,Імʼя,Вік')' у рядку '{count}': '{line.strip()}'"
                     )
-
-
     except FileNotFoundError: # Обробка відсутності файлу
         raise FileNotFoundError(f"Файл '{path}' не знайдено.")
+ 
+    # Якщо є помилки, викидаємо виключення з детальним звітом
     if errors:
         raise ValueError("\n" + "\n".join(errors))
-    
+  
     return cats
 
 # Приклад використання функції
