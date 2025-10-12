@@ -1,0 +1,51 @@
+
+
+def total_salary(path) -> tuple[int, float]:
+    total_s = 0
+    count = 0
+    er = ""
+    try:
+        with open(path, 'r', encoding='utf-8') as file:
+            for line_num, line in enumerate(file, start=1):
+                parts = line.strip().split(",") # Розділення рядка на частини
+
+                if len(parts) == 2:
+                    try:
+                            salary = int(parts[1]) # Конвертація зарплати в ціле число
+                            
+                            #Блок перевірок та виключень з детальним репортом
+                            if salary < 0: # Перевірка на від'ємність зарплати, виключення ValueError
+                                er = (f", Зарплата не може бути від'ємною")
+                                raise ValueError(er)    
+                            if salary == 0: # Перевірка на нульову зарплату. Виведення попередження, але не виключення
+                                print(f"Увага, потенційна ошибка: Зарплата = 0 у рядку {line_num}:' {line.strip()}'")
+                                continue
+                            total_s += salary # Додавання до загальної суми
+                            count += 1 # Лічильник для середньої зарплати
+
+                    except ValueError: # Обробка некоректних значень)
+                        er = f"Некоректне значення зарплати: '{parts[1]}' у рядку {line_num}:' {line.strip()}' {er}"
+                        raise ValueError(er)
+                else: # Обробка рядків з некоректною кількістю частин. Виведення попередження, але не виключення
+                    print(f"Увага, некоректний формат рядка: {line_num}:' {line.strip()}'")
+                    continue
+                
+    except FileNotFoundError: # Обробка відсутності файлу
+        raise FileNotFoundError(f"Файл '{path}' не знайдено.")
+ 
+    average = total_s / count if count > 0 else 0.0 # Обчислення середньої зарплати
+    return total_s, average
+
+try:
+    total, average = total_salary("salary_file.txt")
+    if total > 0:
+        print(f"Загальна сума заробітної плати: {total}, Середня заробітна плата: {average}")
+    else:
+        print("Помилка: Немає валідних рядків або всі зарплати дорівнюють 0.")
+# Обробка виключень
+except FileNotFoundError as fe:
+    print(f"Помилка з файлом: {fe}")
+except ValueError as ve:
+    print(f"Помилка в данних: {ve}")
+except Exception as e: #iнші виключення
+    print(f"Сталася помилка: {e}")
