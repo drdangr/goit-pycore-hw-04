@@ -7,6 +7,7 @@ def get_cats_info(path:str) -> list[dict[str, str]]:
     cats: list[dict[str, str]] = [] 
     errors = []
     count = 0
+    
     try:
         with open(path, 'r', encoding='utf-8') as file: # Відкриваємо файл
             for line in file:
@@ -38,6 +39,7 @@ def get_cats_info(path:str) -> list[dict[str, str]]:
                     )
     except FileNotFoundError: # Обробка відсутності файлу
         raise FileNotFoundError(f"Файл '{path}' не знайдено.")
+
  
     # Якщо є помилки, викидаємо виключення з детальним звітом
     if errors:

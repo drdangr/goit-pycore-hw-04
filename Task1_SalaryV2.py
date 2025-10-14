@@ -55,6 +55,7 @@ def total_salary(path: str) -> tuple[int, float]:
     except FileNotFoundError:
         raise ValueError(f"Файл '{path}' не знайдено.")
 
+
     if critical_errors:
         raise ValueError("Знайдено критичні помилки (обчислення скасовано):\n" + "\n".join(critical_errors))
 
