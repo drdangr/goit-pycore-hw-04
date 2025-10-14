@@ -1,2 +1,11 @@
 Temp/
 temp/
+.venv/
+     venv/
+     env/
+     __pycache__/
+     *.pyc
+     node_modules/
+     .vscode/
+     build/
+     dist/
