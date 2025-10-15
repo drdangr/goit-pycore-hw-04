@@ -1,4 +1,4 @@
-def parse_input(user_input: str) -> tuple[str, list[str]]:
+def parse_input(user_input: str) -> tuple[str, ...]:
     
     
     parts = user_input.strip().split() # Розділення вводу на команду та аргументи
@@ -89,10 +89,12 @@ def main():
         elif command == "all":
             print(show_all(contacts))
         elif command == "":
+            print("Enter a command or type 'help'.")
             continue  # Ігноруємо порожній ввід
         elif command == "help":
             print(help_command())
         else:
+            print("Invalid command.")
             print(help_command()) # Не відома команда, показуємо допомогу
 
 if __name__ == "__main__":
