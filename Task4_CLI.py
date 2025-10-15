@@ -55,7 +55,7 @@ def show_all(contacts: dict[str, str]) -> str:
     return "\n".join(lines)
 
 def help_command() -> str:
-    """help — показать список доступных команд"""
+    """help — показати список доступних команд"""
     return (
         "Available commands:\n"
         "- hello\n"
